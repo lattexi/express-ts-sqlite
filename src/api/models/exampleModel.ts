@@ -2,15 +2,11 @@ import db from '../../database/db';
 import {Article} from '../../types/LocalTypes';
 
 const getAllArticles = (): Article[] => {
-  const stmt = db.prepare('SELECT * FROM articles').all() as Article[];
-  return stmt;
+  return db.prepare('SELECT * FROM articles').all() as Article[];
 };
 
 const getArticle = (id: number | bigint): Article => {
-  const stmt = db
-    .prepare('SELECT * FROM articles WHERE id = ?')
-    .get(id) as Article;
-  return stmt;
+  return db.prepare('SELECT * FROM articles WHERE id = ?').get(id) as Article;
 };
 
 const createArticle = (title: string, description: string): Article => {
