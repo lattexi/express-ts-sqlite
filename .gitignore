@@ -308,3 +308,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,node,visualstudiocode,jetbrains+all
+
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
