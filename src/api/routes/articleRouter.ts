@@ -5,7 +5,7 @@ import {
   articlePost,
   articlePut,
   articleDelete,
-} from '../controllers/exampleController';
+} from '../controllers/articleController';
 
 const router = express.Router();
 

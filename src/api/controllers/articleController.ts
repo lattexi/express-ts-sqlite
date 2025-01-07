@@ -6,7 +6,7 @@ import {
   getAllArticles,
   getArticle,
   updateArticle,
-} from '../models/exampleModel';
+} from '../models/articleModel';
 import CustomError from '../../classes/CustomError';
 
 const articlesGet = (req: Request, res: Response<Article[]>) => {
@@ -15,8 +15,12 @@ const articlesGet = (req: Request, res: Response<Article[]>) => {
 };
 
 const articleGet = (req: Request<{id: string}>, res: Response<Article>) => {
-  const article = getArticle(Number(req.params.id));
-  res.json(article);
+  try {
+    const article = getArticle(Number(req.params.id));
+    res.json(article);
+  } catch (error) {
+    throw new CustomError((error as Error).message, 404);
+  }
 };
 
 const articlePost = (
@@ -25,8 +29,8 @@ const articlePost = (
   next: NextFunction,
 ) => {
   try {
-    const article = createArticle(req.body.title, req.body.description);
-    res.json(article);
+    const article = createArticle(req.body);
+    res.status(201).json(article);
   } catch (error) {
     next(new CustomError((error as Error).message, 500));
   }

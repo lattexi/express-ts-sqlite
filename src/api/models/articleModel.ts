@@ -6,13 +6,19 @@ const getAllArticles = (): Article[] => {
 };
 
 const getArticle = (id: number | bigint): Article => {
-  return db.prepare('SELECT * FROM articles WHERE id = ?').get(id) as Article;
+  const result = db
+    .prepare('SELECT * FROM articles WHERE id = ?')
+    .get(id) as Article;
+  if (!result) {
+    throw new Error('Article not found');
+  }
+  return result;
 };
 
-const createArticle = (title: string, description: string): Article => {
+const createArticle = (article: Omit<Article, 'id'>): Article => {
   const stmt = db
     .prepare('INSERT INTO articles (title, description) VALUES (?, ?)')
-    .run(title, description);
+    .run(article.title, article.description);
   if (!stmt.lastInsertRowid) {
     throw new Error('Failed to insert article');
   }
