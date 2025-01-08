@@ -1,0 +1,14 @@
+{
+  "name": "Express, TypeScript, SQLite",
+  "version": "1.0.0",
+  "description": "For Metropolia Courses",
+  "title": "Example API",
+  "url": "/api/v1",
+  "template": {
+    "withCompare": true,
+    "withGenerator": true,
+    "path": "apidoc-template"
+  },
+  "exclude": ["node_modules/", "public/"],
+  "files": ["src/**/*.ts"]
+}

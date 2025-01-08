@@ -1,0 +1,181 @@
+{
+  "info": {
+    "name": "Articles API Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Article",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/articles",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "articles"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"Test Article\",\n    \"description\": \"This is the content of article 1\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 201', function() {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "const response = pm.response.json();",
+              "pm.test('Article created correctly', function() {",
+              "    pm.expect(response.title).to.equal('Test Article');",
+              "    pm.expect(response.description).to.equal('This is the content of article 1');",
+              "});",
+              "pm.environment.set('articleId', response.id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get All Articles",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/articles",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "articles"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function() {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "const response = pm.response.json();",
+              "pm.test('Response is array', function() {",
+              "    pm.expect(response).to.be.an('array');",
+              "});",
+              "pm.test('Articles have required properties', function() {",
+              "    response.forEach(function(article) {",
+              "        pm.expect(article).to.have.property('id');",
+              "        pm.expect(article).to.have.property('title');",
+              "        pm.expect(article).to.have.property('description');",
+              "    });",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get Article by ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/articles/{{articleId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "articles", "{{articleId}}"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function() {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "const response = pm.response.json();",
+              "pm.test('Article retrieved correctly', function() {",
+              "    pm.expect(response.id).to.equal(parseInt(pm.environment.get('articleId')));",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update Article",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/articles/{{articleId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "articles", "{{articleId}}"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"Updated Title\",\n    \"description\": \"Updated Description\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function() {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "const response = pm.response.json();",
+              "pm.test('Article updated correctly', function() {",
+              "    pm.expect(response.title).to.equal('Updated Title');",
+              "    pm.expect(response.description).to.equal('Updated Description');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Delete Article",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/articles/{{articleId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "articles", "{{articleId}}"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 204', function() {",
+              "    pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ]
+}

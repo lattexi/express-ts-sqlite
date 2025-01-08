@@ -41,8 +41,9 @@ const updateArticle = (
 
 const deleteArticle = (id: number | bigint): void => {
   const stmt = db.prepare('DELETE FROM articles WHERE id = ?').run(id);
+
   if (stmt.changes === 0) {
-    throw new Error('Failed to delete article');
+    throw new Error('Article not found');
   }
 };
 

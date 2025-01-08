@@ -14,12 +14,15 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-eval'"], // unsafe-eval is needed for Apidoc
     },
   }),
 );
 app.use(cors());
 app.use(express.json());
+
+// serve public folder for apidoc
+app.use(express.static('public'));
 
 app.use('/api/v1', api);
 
