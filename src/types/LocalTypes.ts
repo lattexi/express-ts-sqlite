@@ -10,6 +10,13 @@ type Article = {
   id: number;
   title: string;
   description: string;
+  author_id: number;
 };
 
-export type {MessageResponse, ErrorResponse, Article};
+type Author = {
+  id: number;
+  name: string;
+  email: string;
+};
+
+export type {MessageResponse, ErrorResponse, Article, Author};
