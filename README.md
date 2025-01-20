@@ -69,7 +69,10 @@ Contributions are welcome! Please fork the repository and submit a pull request.
 ### Contributions week 1
 
 - Added author routes
-- Fixed tests
+- Configured SQLite database
+- Fixed integration tests and uncommented them
+
+#### Tests:
 ![Tests pass](<tests_pass.png>)
 
 ### Contributors
