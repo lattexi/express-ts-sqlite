@@ -1,4 +1,6 @@
-# Express TypeScript SQLite
+# Express TypeScript SQLite Fork
+
+[![License](https://img.shields.io/github/license/ilkkamtk/express-ts-sqlite)](
 
 An Express.js application template written in TypeScript using SQLite for database management.
 
@@ -64,9 +66,16 @@ This project is an example of an Express.js application using TypeScript and SQL
 
 Contributions are welcome! Please fork the repository and submit a pull request.
 
+### Contributions week 1
+
+- Added author routes
+- Fixed tests
+![Tests pass](<tests_pass.png>)
+
 ### Contributors
 
 - [ilkkamtk](https://github.com/ilkkamtk) - Original Author
+- [latttexi](https://github.com/latttexi) - Contributor
 
 ## License
 
