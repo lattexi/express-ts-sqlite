@@ -66,11 +66,11 @@ This project is an example of an Express.js application using TypeScript and SQL
 
 Contributions are welcome! Please fork the repository and submit a pull request.
 
-### Contributions week 1
+### Contributions by [latttexi]
 
 - Added author routes
 - Configured SQLite database
-- Fixed integration tests and uncommented them
+- Fixed tests and uncommented them
 
 #### Tests:
 ![Tests pass](<tests_pass.png>)
