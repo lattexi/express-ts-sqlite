@@ -1,5 +1,5 @@
-import {NextFunction, Request, Response} from 'express';
-import {Article} from '../../types/LocalTypes';
+import { NextFunction, Request, Response } from 'express';
+import { Article } from '../../types/LocalTypes';
 import {
   createArticle,
   deleteArticle,
@@ -15,7 +15,7 @@ const articlesGet = (_req: Request, res: Response<Article[]>) => {
 };
 
 const articleGet = (
-  req: Request<{id: string}>,
+  req: Request<{ id: string; }>,
   res: Response<Article>,
   next: NextFunction,
 ) => {
@@ -41,7 +41,7 @@ const articlePost = (
 };
 
 const articlePut = (
-  req: Request<{id: string}, unknown, Omit<Article, 'id'>>,
+  req: Request<{ id: string; }, unknown, Omit<Article, 'id'>>,
   res: Response<Article>,
   next: NextFunction,
 ) => {
@@ -59,16 +59,16 @@ const articlePut = (
 };
 
 const articleDelete = (
-  req: Request<{id: string}>,
-  res: Response<unknown>,
+  req: Request<{ id: string; }, unknown, { author_id: string; }>,
+  res: Response,
   next: NextFunction,
 ) => {
   try {
-    deleteArticle(Number(req.params.id));
+    deleteArticle(Number(req.params.id), Number(req.body.author_id));
     res.status(204).end();
   } catch (error) {
     next(new CustomError((error as Error).message, 500));
   }
 };
 
-export {articlesGet, articleGet, articlePost, articlePut, articleDelete};
+export { articlesGet, articleGet, articlePost, articlePut, articleDelete };

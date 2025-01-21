@@ -70,6 +70,7 @@ Contributions are welcome! Please fork the repository and submit a pull request.
 
 - Added author routes
 - Configured SQLite database
+- Fixed articlr delete route
 - Fixed tests and uncommented them
 
 #### Tests:

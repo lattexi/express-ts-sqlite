@@ -44,8 +44,8 @@ const updateArticle = (
   return getArticle(id);
 };
 
-const deleteArticle = (id: number | bigint): void => {
-  const stmt = db.prepare('DELETE FROM articles WHERE id = ?').run(id);
+const deleteArticle = (id: number | bigint, author_id: number | bigint): void => {
+  const stmt = db.prepare('DELETE FROM articles WHERE id = ? AND author_id = ?').run(id, author_id);
 
   if (stmt.changes === 0) {
     throw new Error('Article not found');
